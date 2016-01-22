@@ -1,0 +1,32 @@
+{
+  "_id": "ObjectID",
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "personal_data": {
+    "birth_date": "ISODATE",
+  },
+  "addresses": [
+    {
+      "address_type": "HOME",
+      "city": "London",
+      "street_name": "Baker Street",
+      "street_number": "45b",
+      "state": "Slaskie"
+      "country": "UK"
+    },
+    {
+      "address_type": "WORK",
+      "city": "Warsaw",
+      "street_name": "Rozdzieńskiego",
+      "street_number": "20",
+      "state": "Mazowieckie"
+      "country": "UK"
+    }
+  ],
+  "accounts":{
+    "type": "PERSONAL",
+    "balance": 4566.55,
+    "currency": "PLN"
+  }
+
+}
