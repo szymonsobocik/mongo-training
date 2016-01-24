@@ -3,7 +3,7 @@
   "first_name": "First Name",
   "last_name": "Last Name",
   "personal_data": {
-    "birth_date": "ISODATE",
+    "birth_date": "ISODATE"
   },
   "addresses": [
     {
@@ -11,7 +11,7 @@
       "city": "London",
       "street_name": "Baker Street",
       "street_number": "45b",
-      "state": "Slaskie"
+      "state": "Slaskie",
       "country": "UK"
     },
     {
@@ -19,14 +19,13 @@
       "city": "Warsaw",
       "street_name": "Rozdzieńskiego",
       "street_number": "20",
-      "state": "Mazowieckie"
+      "state": "Mazowieckie",
       "country": "UK"
     }
   ],
-  "accounts":{
+  "accounts": {
     "type": "PERSONAL",
     "balance": 4566.55,
     "currency": "PLN"
   }
-
 }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Mongo Traingin - Szymon Sobocik</title>
+    <title>Mongo Training - Szymon Sobocik</title>
 
     <!--<meta name="description" content="A framework for easily creating beautiful presentations using HTML">-->
     <meta name="author" content="Szymon Sobocik">
@@ -17,6 +17,7 @@
 
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="css/custom.css" id="custom-css">
 
     <!-- Code syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
@@ -53,47 +54,181 @@
 
         <section>
             <h1>Plan</h1>
-            <ol>
-                <li>Wstęp do NoSQL</li>
-                <li>Podstawowe operacje w MongoDB</li>
-                <li>Modelowanie danych dla MongoDB</li>
-                <li>Indeksy i Aggregation Fremework</li>
+            <ol type="a">
+                <li>What is MongoDB?</li>
+                <li>Simple operations</li>
+                <li>Data models</li>
+                <li>Indexes</li>
                 <li>Deployment</li>
+                <li>Aggregation Fremework</li>
             </ol>
 
         </section>
+        <section>
+            <h3>What is MongoDB?</h3>
+            <ul>
+                <li>NoSQL Database
+                    <p>
+                        <small>- No tabular constraints on your data schema</small>
+                    </p>
+                </li>
+                <li>Document Oriented
+                    <p>
+                        <small>- Database is organized into Collections and Documents, not Tables and Rows</small>
+                    </p>
+                </li>
+                <li>Designed with Scalability in Mind
+                    <p>
+                        <small>- Scales well Horizontally</small>
+                    </p>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h3>How it's in SQL?</h3>
+            <section>
+                <p>Let's assume we have a banking application.</p>
+                <ul>
+                    <li>Persons</li>
+                    <li>Accounts</li>
+                </ul>
+                <p>
+                    <small><strong>Person</strong> can have many <strong>Accounts</strong>
+                        and therefore <strong>Account</strong> has only one <strong>Person</strong></small>
+                </p>
+            </section>
+            <section>
+                <img src="images/PersonsAndAccounts.png">
+            </section>
+            <!--<section>-->
+            <!--<p>Account Holders (Persons)</p>-->
+            <!--<img data-src="images/02.Table_AccountHolders.png"/>-->
+
+            <!--<p>Accounts</p>-->
+            <!--<img data-src="images/03.Table_Accounts.png"/>-->
+            <!--</section>-->
+            <section>
+                <p>Get a name for a Person with ID 1</p>
+                <img class="fragment" src="images/sql.01.PersonWithId1.png"/>
+            </section>
+            <section>
+                <p>Get accounts for Person with ID 1</p>
+                <img class="fragment" src="images/sql.02.AccountsForPerson1.png"/>
+                <p class="fragment">Two separate queries. Could be slow on large datasets.</p>
+            </section>
+            <section>
+                <p>Who's the owner of account number 3?</p>
+                <img class="fragment" src="images/sql.03.SearchForAccountHolder3.png"/>
+                <p class="fragment">Must do 'Join' on Account Holder ID</p>
+
+                <aside class="notes">Data was not together.</aside>
+            </section>
+            <section>
+                <p>Which accounts are held by Adam Kowalski</p>
+                <img class="fragment" src="images/sql.04.AccountsForKowalski.png"/>
+                <p class="fragment">Must do 'Join' on Account Holder ID</p>
+
+                <aside class="notes">Search by first and last name. Get an Person ID, and do a join.</aside>
+            </section>
+            <section>
+                <h4>Issues?</h4>
+                <ul class="fragment">
+                    <li>Data across many tables</li>
+                    <li>For one dashboard, requires several queries</li>
+                    <li>Might require computation power</li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>How it's done in MongoDB</h2>
+            </section>
+            <section>
+                <h3>Documents and Collections</h3>
+            </section>
+            <section>
+                <p>Document</p>
+                <!--@formatter:off-->
+                <pre><code class="hljs small-text" data-trim contenteditable>
+{
+   "_id" : ObjectId("54c955492b7c8eb21818bd09"),
+   "address" : {
+      "street" : "2 Avenue",
+      "zipcode" : "10075",
+      "building" : "1480",
+      "coord" : [ -73.9557413, 40.7720266 ],
+   },
+   "borough" : "Manhattan",
+   "cuisine" : "Italian",
+   "grades" : [
+      {
+         "date" : ISODate("2014-10-01T00:00:00Z"),
+         "grade" : "A",
+         "score" : 11
+      },
+      {
+         "date" : ISODate("2014-01-16T00:00:00Z"),
+         "grade" : "B",
+         "score" : 17
+      }
+   ],
+   "name" : "Vella",
+   "restaurant_id" : "41704620"
+}
+                </code></pre>
+                <!--@formatter:on-->
+            </section>
+        </section>
 
         <section>
-            <h1>NoSQL</h1>
-            <section>
-                <h3>Jak to jest w SQL?</h3>
-                Tabelka i relacje
-            </section>
-            <section>
-                <h3>Dokumenty i Kolekcje</h3>
-                json
-            </section>
+            Projections
+        </section>
 
-            <section>
-                <h3>BSON</h3>
-
+        <section>
+            <h3>BSON</h3>
+            <!--@formatter:off-->
                 <pre><code class="hljs" data-trim contenteditable>
-                    function linkify( selector ) {
-                    if( supports3DTransforms ) {
 
-                    var nodes = document.querySelectorAll( selector );
+{
+    "_id": "ObjectID",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "personal_data": {
+        "birth_date": "ISODATE"
+    },
+    "addresses": [
+        {
+            "address_type": "HOME",
+            "city": "London",
+            "street_name": "Baker Street",
+            "street_number": "45b",
+                    "state": "Slaskie"
+                    "country": "UK"
+                    },
+                    {
+                    "address_type": "WORK",
+                    "city": "Warsaw",
+                    "street_name": "Rozdzieńskiego",
+                    "street_number": "20",
+                    "state": "Mazowieckie"
+                    "country": "UK"
+                    }
+                    ],
+                    "accounts": {
+                    "type": "PERSONAL",
+                    "balance": 4566.55,
+                    "currency": "PLN"
+                    }
+                    }
 
-                    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-                    var node = nodes[i];
-
-                    if( !node.className ) {
-                    node.className += ' roll';
-                    }
-                    }
-                    }
-                    }
                 </code></pre>
-            </section>
+            <!--@formatter:on-->
+        </section>
+        <section>
+            <h3>BSON</h3>
+            <img data-src="images/01.AccountHolderWithAccounts.png"/>
+            <img data-src="images/01.AccountHolderWithAccounts.png"/>
+        </section>
 
         </section>
 
@@ -126,6 +261,23 @@
 					{ src: 'plugin/notes/notes.js', async: true }
 				]
 			});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
