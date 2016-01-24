@@ -1,8 +1,8 @@
-.reveal pre code{
-    #max-height: 800px;
-    .small-text {
-        font-size: 0.40em;
-    }
+.reveal pre code {
+
 }
 
+.reveal section img {
+    border: 0px;
+}
 

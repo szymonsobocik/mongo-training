@@ -17,10 +17,11 @@
 
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/black.css" id="theme">
-    <link rel="stylesheet" href="css/custom.css" id="custom-css">
 
     <!-- Code syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <link rel="stylesheet" href="css/custom.css" id="custom-css">
 
     <!-- Printing and PDF exports -->
     <script>
@@ -29,6 +30,17 @@
 			link.type = 'text/css';
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
+
+
+
+
+
+
+
+
+
+
+
 
 
     </script>
@@ -140,16 +152,114 @@
             </section>
         </section>
         <section>
+            <h2>How it's done in MongoDB</h2>
+        </section>
+        <section>
+            <h3>Documents and Collections</h3>
+        </section>
+        <section>
+            <h3>Document</h3>
             <section>
-                <h2>How it's done in MongoDB</h2>
+                <ul>
+                    <li>key-value pairs</li>
+                    <li>looks like JSON</li>
+                    <li>values of fields may include other documents, arrays, and arrays of documents</li>
+                    <li>in DB: Binary JSON --> BSON</li>
+                </ul>
             </section>
             <section>
-                <h3>Documents and Collections</h3>
+                <img src="images/document.01.Person01.png"/>
+                <img src="images/document.01.Person02.png"/>
             </section>
             <section>
-                <p>Document</p>
                 <!--@formatter:off-->
-                <pre><code class="hljs small-text" data-trim contenteditable>
+                <pre><code class="hljs" data-trim contenteditable>
+{
+  "_id": "0",
+  "first_name": "Adam",
+  "last_name": "Kowalski",
+  "accounts": [
+    {
+      "id": 0,
+      "account_type": "Investment",
+      "account_balance": "80000.00",
+      "currency": "USD"
+    },
+    {
+      "id": 1,
+      "account_type": "Savings",
+      "account_balance": "70400.00",
+      "currency": "USD"
+    },
+    {
+      "id": 2,
+      "account_type": "Checking",
+      "account_balance": "4500.00",
+      "currency": "USD"
+    }
+  ]
+}
+                </code></pre>
+                <!--@formatter:on-->
+            </section>
+        </section>
+        <section>
+            <h3>Collections</h3>
+            <section>
+                <ul>
+                    <li>Documents are stored in Collections</li>
+                    <li>Collections are analogous to tables in RDBMS</li>
+                    <li>Does not require a schema</li>
+                </ul>
+            </section>
+            <section>
+                <p>Documents stored in a Collection must have a unique <strong>_id</strong> field that acts as a
+                    <a href="https://docs.mongodb.org/manual/reference/glossary/#term-primary-key">primary key</a>
+                </p>
+                <p>Usually it's a BSON <strong>ObjectId</strong></p>
+            </section>
+            <section>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+{
+    "_id" : ObjectId("56a4acf432ba992db8fd174f"),
+    "Name" : "Adam",
+    "last_name" : "Kowalski"
+},
+{
+    "_id" : ObjectId("56a536875a8b8c0d8298f3df"),
+    "first_name" : "Marek",
+    "last_name" : "Nowak"
+}
+                </code></pre>
+            <!--@formatter:on-->
+            </section>
+        </section>
+
+        <section>
+
+        </section>
+
+        <section>
+            Install MongoJS
+        </section>
+        <section>
+            Mongod, mongo, and mongos
+        </section>
+
+
+        <section>
+            Projections
+            <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+                </code></pre>
+            <!--@formatter:on-->
+        </section>
+
+        <section>
+            <h3>Document</h3>
+            <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
 {
    "_id" : ObjectId("54c955492b7c8eb21818bd09"),
    "address" : {
@@ -177,52 +287,6 @@
 }
                 </code></pre>
                 <!--@formatter:on-->
-            </section>
-        </section>
-
-        <section>
-            Projections
-        </section>
-
-        <section>
-            <h3>BSON</h3>
-            <!--@formatter:off-->
-                <pre><code class="hljs" data-trim contenteditable>
-
-{
-    "_id": "ObjectID",
-    "first_name": "First Name",
-    "last_name": "Last Name",
-    "personal_data": {
-        "birth_date": "ISODATE"
-    },
-    "addresses": [
-        {
-            "address_type": "HOME",
-            "city": "London",
-            "street_name": "Baker Street",
-            "street_number": "45b",
-                    "state": "Slaskie"
-                    "country": "UK"
-                    },
-                    {
-                    "address_type": "WORK",
-                    "city": "Warsaw",
-                    "street_name": "Rozdzieńskiego",
-                    "street_number": "20",
-                    "state": "Mazowieckie"
-                    "country": "UK"
-                    }
-                    ],
-                    "accounts": {
-                    "type": "PERSONAL",
-                    "balance": 4566.55,
-                    "currency": "PLN"
-                    }
-                    }
-
-                </code></pre>
-            <!--@formatter:on-->
         </section>
         <section>
             <h3>BSON</h3>
@@ -261,6 +325,17 @@
 					{ src: 'plugin/notes/notes.js', async: true }
 				]
 			});
+
+
+
+
+
+
+
+
+
+
+
 
 
 

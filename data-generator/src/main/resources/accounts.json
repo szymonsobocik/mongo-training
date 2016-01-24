@@ -1,0 +1,54 @@
+{
+  "Persons": [
+    {
+      "_id": "0",
+      "first_name": "Adam",
+      "last_name": "Kowalski",
+      "accounts": [
+        {
+          "id": 0,
+          "account_type": "Investment",
+          "account_balance": "80000.00",
+          "currency": "USD"
+        },
+        {
+          "id": 1,
+          "account_type": "Savings",
+          "account_balance": "70400.00",
+          "currency": "USD"
+        },
+        {
+          "id": 2,
+          "account_type": "Checking",
+          "account_balance": "4500.00",
+          "currency": "USD"
+        }
+      ]
+    },
+    {
+      "_id": "1",
+      "first_name": "Marek",
+      "last_name": "Nowak",
+      "accounts": [
+        {
+          "id": 3,
+          "account_type": "Checking",
+          "account_balance": "4500.00",
+          "currency": "YEN"
+        },
+        {
+          "id": 5,
+          "account_type": "Investment",
+          "account_balance": "4500.00",
+          "currency": "YEN"
+        },
+        {
+          "id": 6,
+          "account_type": "Savings",
+          "account_balance": "4500.00",
+          "currency": "YEN"
+        }
+      ]
+    }
+  ]
+}
