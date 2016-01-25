@@ -1,16 +1,8 @@
 MongoDB training handout
 ========================
-
-Import data from json file into database
-----------------------------------------
-```
-mongoimport --db databaseName --collection collectionName --file file.json 
-or
-mongoimport --db databaseName --collection collectionName --jsonArray arrayFile.json
-```
-
+                        
 Basic Mongo Shell operations  
-----------------
+----------------------------
 ```
 help
 db.help()
@@ -21,9 +13,19 @@ db.collection.help()
 db.collection.findOne()
 db.collection.find()
 db.collection.find({<query object>})
+db.collection.find({<query object>}, {<projection object>})
 db.collection.update({<query object>}, {<update object>})
 db.collection.remove({<query object>})
 db.collection.deleteOne({<query object>})
+db.collection.drop()
+```
+
+Import data from json file into database
+----------------------------------------
+```
+mongoimport --db databaseName --collection collectionName --file file.json 
+or
+mongoimport --db databaseName --collection collectionName --jsonArray arrayFile.json
 ```
 
 Query operators
