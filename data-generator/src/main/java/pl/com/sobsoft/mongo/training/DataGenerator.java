@@ -8,7 +8,7 @@ public class DataGenerator {
 
     public static void main(String[] args) {
 
-        printUniqueStrings(Data.FIRST_NAMES_MALE);
+        printUniqueStrings(Data.STREET_NAMES);
 
 
     }
@@ -17,8 +17,8 @@ public class DataGenerator {
 
         final HashSet<String> uniqueStrings = new HashSet<>(nonUniqueStrings);
 
-        System.out.println("Non unique values" + nonUniqueStrings.size());
-        System.out.println("Unique values" + uniqueStrings.size());
+        System.out.println("Non unique values " + nonUniqueStrings.size());
+        System.out.println("Unique values " + uniqueStrings.size());
 
         final String join = String.join("\",\"", uniqueStrings);
 
