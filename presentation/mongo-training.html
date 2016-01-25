@@ -30,19 +30,6 @@
 			link.type = 'text/css';
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
-
-
-
-
-
-
-
-
-
-
-
-
-
     </script>
 
     <!--[if lt IE 9]>
@@ -227,7 +214,7 @@
     "last_name" : "Kowalski"
 },
 {
-    "_id" : ObjectId("56a536875a8b8c0d8298f3df"),
+    "_id" : "Some unique String,
     "first_name" : "Marek",
     "last_name" : "Nowak"
 }
@@ -237,16 +224,57 @@
         </section>
 
         <section>
+            <h3>Install MongoDB</h3>
+            <section>
+                <div class="fragment">
+                    <p>C:\MongoDB\Server\3.2\bin\</p>
+                    <img class="fragment" src="images/install.01.mongoFiles.png">
+                </div>
+            </section>
+            <section>
+                <p><strong>mongod</strong></p>
+                <p>Starts up the MongoDB server and indicates we can start inserting data.</p>
+                <p class="fragment">Helper scripts on VM: <strong>'start mongod.bat'</strong> on the Desktop</p>
 
+                <aside class="notes">Start mongod.exe process. Show it's running in console.</aside>
+            </section>
+            <section>
+                <p><strong>mongo</strong></p>
+                <p>The MongoDB Interactive Shell</p>
+                <p>Similar to the javascript interactive shell except it includes a mongodb api</p>
+            </section>
+            <section>
+                <p><strong>mongoimport</strong></p>
+                <p>Used to import data from file (i.e. JSON array)</p>
+                <!--todo import actual data for show-->
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+mongoimport fileToImport.json --jsonArray --collection collection_name
+or
+mongoimport --db trainingDB --collection test2 --file test.json
+                </code></pre>
+                <!--@formatter:on-->
+            </section>
         </section>
+        <!--todo mongodb structure-->
 
         <section>
-            Install MongoJS
+            <h3>MongoDB Interactive Shell</h3>
+            <section>
+                <ul>
+                    <li>show dbs</li>
+                    <li>use dbName</li>
+                    <li>show collections</li>
+                    <li>help</li>
+                    <li>db.help()</li>
+                </ul>
+            </section>
+            <section>
+                <p>To create a database with name 'training' simple type <br>'<code>use training</code>'</p>
+                <p>Database will be created when documents are inserted</p>
+                <p class="fragment">Also possible with '<code>db.createDatabase()</code>' function</p>
+            </section>
         </section>
-        <section>
-            Mongod, mongo, and mongos
-        </section>
-
 
         <section>
             Projections
@@ -325,6 +353,14 @@
 					{ src: 'plugin/notes/notes.js', async: true }
 				]
 			});
+
+
+
+
+
+
+
+
 
 
 
