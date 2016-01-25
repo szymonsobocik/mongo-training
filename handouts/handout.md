@@ -72,3 +72,28 @@ db.persons.find({"field":{$exists: true}})
 | $elemMatch| Selects documents if element in the array field matches all the specified $elemMatch conditions.
 | $size	    | Selects documents if the array field is a specified size.
 
+Update Operators
+----------------
+### Fields
+| Name  	| Description|
+|-----------|------------|
+| $inc	    | Increments the value of the field by the specified amount.
+| $mul	    | Multiplies the value of the field by the specified amount.
+| $rename	| Renames a field.
+| $setOnInsert |Sets the value of a field if an update results in an insert of a document. Has no effect on update operations that modify existing documents.
+| $set		| Sets the value of a field in a document.
+| $unset	| Removes the specified field from a document.
+| $min		| Only updates the field if the specified value is less than the existing field value.
+| $max		| Only updates the field if the specified value is greater than the existing field value.
+| $currentDate | Sets the value of a field to current date, either as a Date or a Timestamp.
+
+### Array Operators
+| Name  	| Description|
+|-----------|------------|
+| $		    | Acts as a placeholder to update the first element that matches the query condition in an update.
+| $addToSet	| Adds elements to an array only if they do not already exist in the set.
+| $pop		| Removes the first or last item of an array.
+| $pullAll	| Removes all matching values from an array.
+| $pull	    | Removes all array elements that match a specified query.
+| $pushAll	| Deprecated. Adds several items to an array.
+| $push	    | Adds an item to an array.
