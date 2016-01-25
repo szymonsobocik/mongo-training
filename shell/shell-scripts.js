@@ -28,4 +28,7 @@ db.persons.remove({"first_name":"Artur"})
 db.persons.update({"first_name":"Szymon"}, {"$set":{"age":67}})
 
 
+db.meds.createIndex({"quantity":1})
+
+
     db.person.aggregate([{$group: {_id: "$accounts.account_type"}}])
