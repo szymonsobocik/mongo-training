@@ -1,7 +1,6 @@
 package pl.com.sobsoft.mongo.training;
 
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class RandomData {
 
@@ -9,6 +8,19 @@ public class RandomData {
 
     public static <T> T getRandomFrom(List<T> values) {
         return values.get(random.nextInt(values.size()));
+    }
+
+    public static <T> List<T> getRandomFrom(List<T> values, int howMany) {
+        Set<T> results = new HashSet<>();
+        if (howMany < 1) {
+            return null;
+        }
+
+        for (int i = 0; i < howMany; i++) {
+            results.add(getRandomFrom(values));
+        }
+
+        return new ArrayList<>(results);
     }
 
     public static int getRandomNumber(int min, int max) {

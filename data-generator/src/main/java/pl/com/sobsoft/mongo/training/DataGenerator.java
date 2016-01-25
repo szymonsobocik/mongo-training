@@ -1,10 +1,10 @@
 package pl.com.sobsoft.mongo.training;
 
+import javax.swing.text.Document;
 import java.util.HashSet;
 import java.util.List;
 
 public class DataGenerator {
-
 
     public static void main(String[] args) {
 
