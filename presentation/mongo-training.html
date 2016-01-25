@@ -25,11 +25,11 @@
 
     <!-- Printing and PDF exports -->
     <script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
     </script>
 
     <!--[if lt IE 9]>
@@ -45,7 +45,9 @@
     <div class="slides">
         <section>
             <h1>MongoDB</h1>
+
             <h3>Document database</h3>
+
             <p>
                 <small>Szymon Sobocik</small>
             </p>
@@ -113,11 +115,13 @@
             <section>
                 <p>Get accounts for Person with ID 1</p>
                 <img class="fragment" src="images/sql.02.AccountsForPerson1.png"/>
+
                 <p class="fragment">Two separate queries. Could be slow on large datasets.</p>
             </section>
             <section>
                 <p>Who's the owner of account number 3?</p>
                 <img class="fragment" src="images/sql.03.SearchForAccountHolder3.png"/>
+
                 <p class="fragment">Must do 'Join' on Account Holder ID</p>
 
                 <aside class="notes">Data was not together.</aside>
@@ -125,6 +129,7 @@
             <section>
                 <p>Which accounts are held by Adam Kowalski</p>
                 <img class="fragment" src="images/sql.04.AccountsForKowalski.png"/>
+
                 <p class="fragment">Must do 'Join' on Account Holder ID</p>
 
                 <aside class="notes">Search by first and last name. Get an Person ID, and do a join.</aside>
@@ -203,6 +208,7 @@
                 <p>Documents stored in a Collection must have a unique <strong>_id</strong> field that acts as a
                     <a href="https://docs.mongodb.org/manual/reference/glossary/#term-primary-key">primary key</a>
                 </p>
+
                 <p>Usually it's a BSON <strong>ObjectId</strong></p>
             </section>
             <section>
@@ -233,25 +239,30 @@
             </section>
             <section>
                 <p><strong>mongod</strong></p>
+
                 <p>Starts up the MongoDB server and indicates we can start inserting data.</p>
-                <p class="fragment">Helper scripts on VM: <strong>'start mongod.bat'</strong> on the Desktop</p>
+
+                <p class="fragment">Helper script in VM: <strong>'start mongod.bat'</strong> on the Desktop</p>
 
                 <aside class="notes">Start mongod.exe process. Show it's running in console.</aside>
             </section>
             <section>
                 <p><strong>mongo</strong></p>
+
                 <p>The MongoDB Interactive Shell</p>
+
                 <p>Similar to the javascript interactive shell except it includes a mongodb api</p>
             </section>
             <section>
                 <p><strong>mongoimport</strong></p>
+
                 <p>Used to import data from file (i.e. JSON array)</p>
                 <!--todo import actual data for show-->
                 <!--@formatter:off-->
                 <pre><code class="hljs" data-trim contenteditable>
-mongoimport fileToImport.json --jsonArray --collection collection_name
+mongoimport --db databaseName --collection collectionName --file file.json
 or
-mongoimport --db trainingDB --collection test2 --file test.json
+mongoimport --db databaseName --collection collectionName --jsonArray arrayFile.json
                 </code></pre>
                 <!--@formatter:on-->
             </section>
@@ -262,19 +273,161 @@ mongoimport --db trainingDB --collection test2 --file test.json
             <h3>MongoDB Interactive Shell</h3>
             <section>
                 <ul>
+                    <li>help</li>
+                    <li>db.help()</li>
                     <li>show dbs</li>
                     <li>use dbName</li>
                     <li>show collections</li>
-                    <li>help</li>
-                    <li>db.help()</li>
                 </ul>
             </section>
             <section>
                 <p>To create a database with name 'training' simple type <br>'<code>use training</code>'</p>
+
                 <p>Database will be created when documents are inserted</p>
-                <p class="fragment">Also possible with '<code>db.createDatabase()</code>' function</p>
             </section>
         </section>
+
+        <section>
+            <h3>Insert documents</h3>
+            <section>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+db.persons.insert({ "name":"Marek", "age":"22" } )
+                </code></pre>
+            <!--@formatter:on-->
+            </section>
+
+        </section>
+
+        <section>
+            <h3>Basic query operations</h3>
+            <section>
+                <p>Find documents</p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+db.persons.find()
+db.persons.findOne()
+                </code></pre>
+            <!--@formatter:on-->
+            </section>
+            <section>
+                <p>Equality Conditions</p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+{ field1: value1, field2.embedded: value2, ... }
+                </code></pre>
+                <p>Field can be a top level field, or embedded document.<br>Use dot (.) notation for embedded documents.</p>
+            <!--@formatter:on-->
+            </section>
+            <section>
+                <p>Query by a Top Level Field</p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+db.persons.find({"first_name":"John"})
+                </code></pre>
+            <!--@formatter:on-->
+            </section>
+            <section>
+                <p>Query by a Field in an Embedded Document</p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+db.persons.find({"address.street":"Bojkowska"})
+                </code></pre>
+                <!--@formatter:on-->
+            </section>
+            <section>
+                <p>Query by a Field in an Array</p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+db.persons.find({"accounts.type":"Savings"})
+                </code></pre>
+                <!--@formatter:on-->
+            </section>
+        </section>
+
+        <section>
+            <h3>Specify Conditions with Operators</h3>
+            <section>
+                <p>Basic syntax</p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+{ field1: { operator1: value1 } }
+                </code></pre>
+            <!--@formatter:on-->
+            </section>
+            <section>
+                <p>Greater Than Operator ($gt)</p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+db.persons.find({"age":{$gt:30}})
+                </code></pre>
+            <!--@formatter:on-->
+                <p>Less Than Operator ($lt)</p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+db.persons.find({"age":{$lt:18}})
+                </code></pre>
+            <!--@formatter:on-->
+            </section>
+            <section>
+                <p>Logical <strong>AND</strong></p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+db.persons.find({"first_name":"John","age":20})
+                </code></pre>
+            <!--@formatter:on-->
+                <p>Logical <strong>OR</strong></p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+db.persons.find({$or:[{"name":"Marek"},{"age":31}]})
+                </code></pre>
+            <!--@formatter:on-->
+            </section>
+        </section>
+
+        <section>
+            <h3>Cursor</h3>
+
+            <p><code>db.collection.find()</code> returns a <code><strong>cursor</strong></code> object to matching
+                documents</p>
+
+            <p>Cursor can be modified with <code>limit, skip and sort</code> orders</p>
+        </section>
+        <section>
+            <h3>Cursor modifiers</h3>
+            <section>
+                <p>Paging</p>
+
+                <p><code>limit() and skip()</code></p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+db.accounts.find().limit(2)
+db.accounts.find().skip(20)
+db.accounts.find().limit(2).skip(10)
+                </code></pre>
+            <!--@formatter:on-->
+            </section>
+            <section>
+                <p>Ordering</p>
+
+                <p><code>sort()</code></p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+//ascending
+db.accounts.find().order({"first_name":1})
+
+//descending
+db.accounts.find().order({"first_name":-1})
+
+//descending by age then ascending by first name
+db.accounts.find().order({"age":-1, "first_name":1})
+                </code></pre>
+            <!--@formatter:on-->
+                <p class="fragment">By default MongoDB does <strong>not</strong> guarantee the order of query results</p>
+                <p class="fragment">Sorting happens before <code>limit and skip</code></p>
+            </section>
+        </section>
+
 
         <section>
             Projections
@@ -333,63 +486,42 @@ mongoimport --db trainingDB --collection test2 --file test.json
 
 <script>
 
-			// Full list of configuration options available at:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
 
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
 
-				// Optional reveal.js plugins
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true }
-				]
-			});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'plugin/zoom-js/zoom.js', async: true},
+            {src: 'plugin/notes/notes.js', async: true}
+        ]
+    });
 
 
 </script>
