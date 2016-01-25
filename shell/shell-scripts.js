@@ -9,3 +9,7 @@ db.test.find({
     'Name': 'Szymon'
     }
     ).pretty()
+
+
+
+db.person.aggregate([{$group:{_id:"$accounts.account_type"}}])
