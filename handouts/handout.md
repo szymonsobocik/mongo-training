@@ -21,6 +21,9 @@ db.collection.help()
 db.collection.findOne()
 db.collection.find()
 db.collection.find({<query object>})
+db.collection.update({<query object>}, {<update object>})
+db.collection.remove({<query object>})
+db.collection.deleteOne({<query object>})
 ```
 
 Query operators
