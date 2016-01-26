@@ -34,6 +34,18 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     </script>
 
     <!--[if lt IE 9]>
@@ -257,21 +269,14 @@
 
                 <p>Similar to the javascript interactive shell except it includes a mongodb api</p>
             </section>
-            <section>
-                <p><strong>mongoimport</strong></p>
-
-                <p>Used to import data from file (i.e. JSON array)</p>
-                <!--todo import actual data for show-->
-                <!--@formatter:off-->
-                <pre><code class="hljs" data-trim contenteditable>
-mongoimport --db databaseName --collection collectionName --file file.json
-or
-mongoimport --db databaseName --collection collectionName --jsonArray arrayFile.json
-                </code></pre>
-                <!--@formatter:on-->
-            </section>
         </section>
-        <!--todo mongodb structure-->
+        <section>
+            <h3>MongoDB structure</h3>
+            <!--todo mongodb structure-->
+
+            <aside class="notes">Draw on board. mongod, mongo, client app, drivers</aside>
+        </section>
+
 
         <section>
             <h3>MongoDB Interactive Shell</h3>
@@ -387,12 +392,16 @@ db.persons.find({"age":{$lt:18}})
                 <!--@formatter:off-->
                 <pre><code class="hljs" data-trim contenteditable>
 db.persons.find({"name":{$ne:"Adam"}})
+
+//same as
+db.persons.find({"name":{$not:{$eq:"Adam"}}})
                 </code></pre>
                 <!--@formatter:on-->
                 <p>Equals operator ($eq)</p>
                 <!--@formatter:off-->
                 <pre><code class="hljs" data-trim contenteditable>
 db.persons.find({"name":{$eq:"Adam"}})
+
 //same as
 db.persons.find({"name":"Adam"})
                 </code></pre>
@@ -409,6 +418,9 @@ db.persons.find({"name":{$in:["Adam", "Marek", "John"]}})
                 <!--@formatter:off-->
                 <pre><code class="hljs" data-trim contenteditable>
 db.persons.find({"name":{$nin:["Smith", "Adams"]}})
+
+//same as
+db.persons.find({"name":{$not:{$in:["Smith", "Adams"]}}})
                 </code></pre>
                 <!--@formatter:on-->
             </section>
@@ -428,7 +440,7 @@ db.persons.find({$or:[{"name":"Marek"},{"age":31}]})
             </section>
         </section>
         <section>
-            <h3>Update</h3>
+            <h3>Update documents</h3>
             <section>
                 <p>Syntax</p>
                 <!--@formatter:off-->
@@ -445,9 +457,106 @@ db.persons.updateMany({query object}, {update object}})
                 <!--@formatter:on-->
             </section>
             <section>
+                <p>Replace existing document etirely</p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+db.accounts.update({"first_name":"Kathleen"},
+                    {"first_name":"Johna", "last_name":"Smith"})
 
+db.accounts.update({"first_name":"Kathleen"},
+                    {"completely":"different document"})
+                </code></pre>
+                <!--@formatter:on-->
             </section>
+            <section>
+                <p>Use update operators - modify specific fields</p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+//change only specific fields
+db.accounts.update({"first_name":"Kathleen"},{
+                    $inc: {"books_read": 5}
+                    $set:{
+                        "first_name":"Johna",
+                        "update_date": ISODate('2016-01-20')
+                    },
+                    $mul: {"salary": 2}
+               })
+                </code></pre>
+                <!--@formatter:on-->
+                <p class="fragment" style="text-align: left;">
+                    <code>$inc</code> - increment (decrement) field by givenvalue<br>
+                    <code>$set</code> - set a new value for a fields<br>
+                    <code>$mul</code> - multiplies field by a given value</p>
+            </section>
+            <section>
+                <p>Use update operators - remove a field</p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+//unset given field
+db.accounts.update({"first_name":"Kathleen"},{
+                    $unset: {"is_manager": 1}
+               })
 
+//change field name
+db.accounts.update({"first_name":"Kathleen"},{
+                    $rename: {"nickname": "alias"}
+               })
+                </code></pre>
+                <!--@formatter:on-->
+                <p class="fragment" style="text-align: left;">
+                    <code>$unset</code> - remove field from document<br>
+                    <code>$rename</code> - change filed name<br>
+            </section>
+        </section>
+        <section>
+            <h3>Remove/Delete documents</h3>
+            <section>
+                <p>Remove some documents by query</p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+//remove all documents that match a condition
+db.accounts.remove({"status":"officer"}});
+//return WriteResult:
+WriteResult({ "nRemoved" : numberOfRemovedDocuments })
+
+//remove only one document
+db.accounts.remove({"status":"officer"}, {justOne:true}});
+//should return WriteResult object:
+WriteResult({ "nRemoved" : 1 })
+                </code></pre>
+                <!--@formatter:on-->
+            </section>
+            <section>
+                <p>Remove all documents</p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+//remove all documents from collection
+db.accounts.remove({})
+
+//drop a collection
+db.accounts.drop()
+                </code></pre>
+                <!--@formatter:on-->
+                <p class="fragment">Drop deletes entire collection, including the indexes. May be more efficient.</p>
+            </section>
+        </section>
+        <section>
+            <h3>Count</h3>
+            <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+//count all documents in collection
+db.accounts.count()
+db.accounts.find().count
+
+//count documents with a query
+db.accounts.find({"name":"John"}).count()
+                </code></pre>
+                <!--@formatter:on-->
+        </section>
+
+        <section>
+            <h3>Tasks - Iteration 1</h3>
+            <a href="../tasks/task.01/task.01.md">../mongo-training/tasks/task.01/task.01.md</a>
         </section>
 
         <section>
@@ -494,14 +603,69 @@ db.accounts.find().order({"age":-1, "first_name":1})
             </section>
         </section>
 
-        <!-- todo tasks 1-->
-        <!--0. Remove in presentation-->
+        <section>
+            <h3>Projections</h3>
+            <section>
+                <p>Limit a data fetched form database</p>
+                <p>Use when only sub-set of fields is needed</p>
+            </section>
+            <section>
+                <p>Syntax</p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+db.persons.find({query document}, {projection document})
+
+//projection document:
+{"field_name":1, "other_field": 1, "unwanted_field":0}
+                </code></pre>
+                <!--@formatter:on-->
+            </section>
+            <section>
+                <p>Example</p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+db.persons.find({"department":"FP Academy"},
+                    {"first_name":1, "last_name":1})
+//will return only _id, first_name and last_name fields
+
+//explicitly exlude _id field
+db.persons.find({"department":"FP Academy"},
+                    {"first_name":1, "last_name":1, _id:0})
+//will return objects containing only first_name and last_name fields
+//without _id field
+                </code></pre>
+                <!--@formatter:on-->
+            </section>
+        </section>
+
+
+        <section>
+            <h3>mongoimport</h3>
+
+            <p>Located in mongo install directory.<br>
+                Used to import data from file (i.e. JSON array)</p>
+            <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+mongoimport --db databaseName --collection collectionName --file file.json
+or
+mongoimport --db databaseName --collection collectionName --jsonArray arrayFile.json
+                </code></pre>
+                <!--@formatter:on-->
+            <aside class="notes">import actual data for show</aside>
+        </section>
 
         <!-- todo tasks 2 Import, Query, Limit, Skip Projections-->
 
-        <!--todo $inc-->
+        <section>
+            <h3>Tasks - Iteration 2</h3>
+            <a href="../tasks/task.02/task.02.md">../mongo-training/tasks/task.02/task.02.md</a>
+        </section>
 
-        <!--todo indexes-->
+        <section>
+            <h1>Indexes</h1>
+            <!--todo indexes-->
+        </section>
+
         <!--Without indexes, MongoDB must perform a collection scan, i.e. scan every document in a collection-->
 
         <!--index types-->
@@ -521,18 +685,18 @@ db.accounts.find().order({"age":-1, "first_name":1})
 
         <!--db.collection.totalIndexSize()-->
 
-
         <section>
-            <!--todo projections-->
-            Projections
-            <!--@formatter:off-->
-                <pre><code class="hljs" data-trim contenteditable>
-                </code></pre>
-            <!--@formatter:on-->
+            <h3>Replica Set</h3>
+            <!--todo replica set-->
         </section>
 
         <section>
-            <h3>Document</h3>
+            <h3>Sharding</h3>
+            <!--todo sharding-->
+        </section>
+
+        <section>
+            <h3>Document example</h3>
             <!--@formatter:off-->
                 <pre><code class="hljs" data-trim contenteditable>
 {
@@ -563,13 +727,7 @@ db.accounts.find().order({"age":-1, "first_name":1})
                 </code></pre>
                 <!--@formatter:on-->
         </section>
-        <section>
-            <h3>BSON</h3>
-            <img data-src="images/01.AccountHolderWithAccounts.png"/>
-            <img data-src="images/01.AccountHolderWithAccounts.png"/>
-        </section>
 
-        </section>
 
     </div>
 
@@ -616,6 +774,18 @@ db.accounts.find().order({"age":-1, "first_name":1})
             {src: 'plugin/notes/notes.js', async: true}
         ]
     });
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

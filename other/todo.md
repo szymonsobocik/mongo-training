@@ -2,9 +2,6 @@ TODO
 ====
 0. Tasks 2 (more queries, (limit, skip, projections)
 
-0. Remove in presentation
-0. Update in presentation
-0. Add count() to presentation
 0. Projections in presentation
 
 0. ACID in MongoDB

@@ -146,4 +146,7 @@ Expected results:
     "vip" : true
 }
 ```
-                                
+
+17.
+---
+Decrement your age by 30 with single update. Use update operator different than $set.                                
