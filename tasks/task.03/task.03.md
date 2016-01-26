@@ -19,4 +19,7 @@ Data should support:
 - display content of persons whom I follow
 - display article and picture comments and comments authors name
 
+Consider:
+- number of queries
+- how big document
 

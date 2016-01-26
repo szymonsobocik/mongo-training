@@ -46,6 +46,7 @@
 
 
 
+
     </script>
 
     <!--[if lt IE 9]>
@@ -71,14 +72,14 @@
 
         <section>
             <h1>Plan</h1>
-            <ol type="a">
-                <li>What is MongoDB?</li>
+            <ul type="a">
+                <li>What is MongoDB</li>
                 <li>Simple operations</li>
                 <li>Data models</li>
                 <li>Indexes</li>
-                <li>Deployment</li>
-                <li>Aggregation Fremework</li>
-            </ol>
+                <li>Replica Set</li>
+                <li>Sharding</li>
+            </ul>
 
         </section>
         <section>
@@ -553,6 +554,15 @@ db.accounts.find({"name":"John"}).count()
                 </code></pre>
                 <!--@formatter:on-->
         </section>
+        <section>
+            <h3>Exists</h3>
+            <p>Check if document has a field</p>
+            <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+db.auta.find({"rok":{$exists:1}})
+                </code></pre>
+                <!--@formatter:on-->
+        </section>
 
         <section>
             <h3>Tasks - Iteration 1</h3>
@@ -696,6 +706,73 @@ mongoimport --db databaseName --collection collectionName --jsonArray arrayFile.
         </section>
 
         <section>
+            <h3>Summary</h3>
+            <!--todo sharding-->
+        </section>
+
+        <section>
+            <h3>Advantages of MongoDB over RDBMS</h3>
+            <section>
+                <ul>
+                    <li class="fragment">Schema less : MongoDB is document database in which one collection holds
+                        different different documents.
+                        Number of fields, content and size of the document can be differ from one document to another.
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <ul>
+                    <li>Structure of a single object is clear</li>
+                    <li class="fragment">No complex joins</li>
+                    <li class="fragment">Deep query-ability. MongoDB supports dynamic queries on documents using a
+                        document-based query language
+                        that's nearly as powerful as SQL
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <ul>
+                    <li>Tuning</li>
+                    <li class="fragment">Ease of scale-out: MongoDB is easy to scale</li>
+                    <li class="fragment">Conversion / mapping of application objects to database objects not needed</li>
+                    <li class="fragment">Uses internal memory for storing the (windowed) working set, enabling faster
+                        access of data
+                    </li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <h3>Why should use MongoDB</h3>
+            <section>
+                <ul>
+                    <li>Document Oriented Storage : Data is stored in the form of JSON style documents</li>
+                    <li class="fragment">Index on any attribute</li>
+                    <li class="fragment">Replication & High Availability</li>
+                </ul>
+            </section>
+            <section>
+                <ul>
+                    <li>Auto-Sharding</li>
+                    <li class="fragment">Rich Queries</li>
+                    <li class="fragment">Fast In-Place Updates</li>
+                    <li class="fragment">Professional Support By MongoDB</li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <h3>Where should use MongoDB?</h3>
+            <section>
+                <ul>
+                    <li>Big Data</li>
+                    <li class="fragment">Content Management and Delivery</li>
+                    <li class="fragment">Mobile and Social Infrastructure</li>
+                    <li class="fragment">User Data Management</li>
+                    <li class="fragment">Data Hub</li>
+                </ul>
+            </section>
+        </section>
+
+        <section>
             <h3>Document example</h3>
             <!--@formatter:off-->
                 <pre><code class="hljs" data-trim contenteditable>
@@ -774,6 +851,7 @@ mongoimport --db databaseName --collection collectionName --jsonArray arrayFile.
             {src: 'plugin/notes/notes.js', async: true}
         ]
     });
+
 
 
 
