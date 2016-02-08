@@ -24,8 +24,8 @@ Expected format:
 }
 ```
 
-`mark` - 1 to 10 (10 is the best) 
-`comment` - write something, that you liked/hated most
+`mark` : 1 to 10 (10 is the best)
+`comment` : write something, that you liked/hated most
 
 04.
 ---

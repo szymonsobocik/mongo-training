@@ -17,7 +17,7 @@ Count them. Should be 23.
 
 04.
 ---
-Pretty display first 3 persons with `last_name` equal Smith. Sort by `first_name` ascending.
+Pretty display only the first 3 persons with `last_name` equal Smith. Sort by `first_name` ascending.
 
 You should get persons with names: Aaron, Adam, Alice 
 

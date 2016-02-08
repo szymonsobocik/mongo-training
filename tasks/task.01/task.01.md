@@ -149,4 +149,9 @@ Expected results:
 
 17.
 ---
-Decrement your age by 30 with single update. Use update operator different than $set.                                
+Decrement your age by 30 with single update. Use update operator different than $set.
+
+18.
+---
+Check what will happen if you try to increment Donald Ducks age by some value.
+Note that he doesn't have `age` field in his document.
