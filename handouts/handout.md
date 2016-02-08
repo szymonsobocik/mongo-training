@@ -14,6 +14,8 @@ db.collection.findOne()
 db.collection.find()
 db.collection.find({<query object>})
 db.collection.find({<query object>}, {<projection object>})
+db.collection.count()
+db.collection.distinct()
 db.collection.update({<query object>}, {<update object>})
 db.collection.remove({<query object>})
 db.collection.deleteOne({<query object>})
@@ -97,3 +99,14 @@ Update Operators
 | $pull	    | Removes all array elements that match a specified query.
 | $pushAll	| Deprecated. Adds several items to an array.
 | $push	    | Adds an item to an array.
+
+Indexes
+-------
+```
+db.collection.find().explain()
+db.collection.find().explain("executionStats")
+db.collection.createIndex()
+db.collection.getIndexes()
+db.collection.stats()
+db.collection.dropIndex()
+```

@@ -79,13 +79,5 @@ Display only `gender' of the oldest person in the bank.
 
 12.
 ---
-Display `personal` data of youngest person, who doesn't have any accounts.
-```
-db.accounts.find({"accounts":{$exists:0}}, {"personal":1, _id:0}).sort({"personal.birth_date":-1}).limit(1).pretty()
-"personal" : {
-       "mother_name" : "Marilyn",
-       "father_name" : "Clarence",
-       "gender" : "female",
-       "birth_date" : ISODate("2013-02-25T08:25:43.292Z")
-}
-```       
+Display `personal` data of the youngest person, who doesn't have any accounts.
+

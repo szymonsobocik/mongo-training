@@ -10,16 +10,13 @@ TODO
 
 0. Tasks 4 (data modeling in MongoDB)
 
-0. Presentation about aggregation framework
-0. Distincts
-0. Data for aggregation
-0. Tasks (aggregation)
-
-
 0. Write Concerns to presentation
 0. Presentation about Replica Set and Sharding
 
 0. Additional tasks
 0. Connect to my mongoserver, and inster data there.
 
-0. Print Handouts
+0. Presentation about aggregation framework
+0. Distincts
+0. Data for aggregation
+0. Tasks (aggregation)
