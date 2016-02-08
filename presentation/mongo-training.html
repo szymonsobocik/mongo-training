@@ -47,6 +47,10 @@
 
 
 
+
+
+
+
     </script>
 
     <!--[if lt IE 9]>
@@ -598,13 +602,13 @@ db.accounts.find().limit(2).skip(10)
                 <!--@formatter:off-->
                 <pre><code class="hljs" data-trim contenteditable>
 //ascending
-db.accounts.find().order({"first_name":1})
+db.accounts.find().sort({"first_name":1})
 
 //descending
-db.accounts.find().order({"first_name":-1})
+db.accounts.find().sort({"first_name":-1})
 
 //descending by age then ascending by first name
-db.accounts.find().order({"age":-1, "first_name":1})
+db.accounts.find().sort({"age":-1, "first_name":1})
                 </code></pre>
             <!--@formatter:on-->
                 <p class="fragment">By default MongoDB does <strong>not</strong> guarantee the order of query results
@@ -673,7 +677,25 @@ mongoimport --db databaseName --collection collectionName --jsonArray arrayFile.
 
         <section>
             <h1>Indexes</h1>
-            <!--todo indexes-->
+        </section>
+
+        <section>
+            <h3>Tasks - Iteration 3</h3>
+            <a href="../tasks/task.02/task.02.md">../mongo-training/tasks/task.02/task.02.md</a>
+        </section>
+
+        <!--todo indexes-->
+        <section>
+            <h3>Indexes</h3>
+            <section>
+                <p>Without indexes, MongoDB must perform a collection scan, i.e. scan every document in a collection</p>
+            </section>
+            <section>
+                <p>Types</p>
+                <ul>
+                    <li></li>
+                </ul>
+            </section>
         </section>
 
         <!--Without indexes, MongoDB must perform a collection scan, i.e. scan every document in a collection-->
@@ -696,18 +718,17 @@ mongoimport --db databaseName --collection collectionName --jsonArray arrayFile.
         <!--db.collection.totalIndexSize()-->
 
         <section>
-            <h3>Replica Set</h3>
+            <h1>Replica Set</h1>
             <!--todo replica set-->
         </section>
 
         <section>
-            <h3>Sharding</h3>
+            <h1>Sharding</h1>
             <!--todo sharding-->
         </section>
 
         <section>
-            <h3>Summary</h3>
-            <!--todo sharding-->
+            <h1>Summary</h1>
         </section>
 
         <section>
@@ -851,6 +872,10 @@ mongoimport --db databaseName --collection collectionName --jsonArray arrayFile.
             {src: 'plugin/notes/notes.js', async: true}
         ]
     });
+
+
+
+
 
 
 

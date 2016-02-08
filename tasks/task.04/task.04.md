@@ -3,7 +3,7 @@ Iteration 04. Indexes
 
 01.
 ---
-Use `training` dabase. Count documents in collection `meds`.
+Use `training` database. Count documents in collection `meds`.
 
 02.
 ---

@@ -1,0 +1,15 @@
+1.
+Skopiować obraz maszyny
+ssobocik_mongodb_v4 
+z 
+\\morpheus\pub\Install\Training\VM
+
+na dysk lokalny do katalogu D:\TRAINING
+
+
+2.
+Zaimportować maszynę ssobocik_mongodb_v4 w Virtual Box
+
+3.
+Uruchomić Intellij Idea
+Pobrać najnowsze źródła: CTRL + T
