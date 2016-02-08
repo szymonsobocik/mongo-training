@@ -819,7 +819,8 @@ db.addresses.createIndex( { "xmpp_id": 1 }, { sparse: true } )
                     from a collection after a certain amount of time</p>
                 <!--@formatter:off-->
                 <pre><code class="hljs" data-trim contenteditable>
-db.eventlog.createIndex( { "lastModifiedDate": 1 }, { expireAfterSeconds: 3600 } )
+db.eventlog.createIndex( { "lastModifiedDate": 1 },
+                    { expireAfterSeconds: 3600 } )
                 </code></pre>
                 <!--@formatter:on-->
                 <p class="fragment">Create on a field whose value is either a date or an array that contains date values</p>
@@ -847,15 +848,15 @@ db.eventlog.createIndex( { "lastModifiedDate": 1 }, { expireAfterSeconds: 3600 }
         <!--db.collection.totalIndexSize()-->
 
         <section>
-            <h3>Tasks - Iteration 3</h3>
-            <p>Modeling data in MongoDB</p>
-            <a href="../tasks/task.03/task.03.md">../mongo-training/tasks/task.03/task.03.md</a>
-        </section>
-
-        <section>
             <h3>Tasks - Iteration 4</h3>
             <p>Indexes</p>
             <a href="../tasks/task.04/task.04.md">../mongo-training/tasks/task.04/task.04.md</a>
+        </section>
+
+        <section>
+            <h3>Tasks - Iteration 3</h3>
+            <p>Modeling data in MongoDB</p>
+            <a href="../tasks/task.03/task.03.md">../mongo-training/tasks/task.03/task.03.md</a>
         </section>
 
         <section>
