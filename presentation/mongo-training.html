@@ -51,6 +51,7 @@
 
 
 
+
     </script>
 
     <!--[if lt IE 9]>
@@ -672,16 +673,12 @@ mongoimport --db databaseName --collection collectionName --jsonArray arrayFile.
 
         <section>
             <h3>Tasks - Iteration 2</h3>
+            <p>Import, Query, Projections</p>
             <a href="../tasks/task.02/task.02.md">../mongo-training/tasks/task.02/task.02.md</a>
         </section>
 
         <section>
             <h1>Indexes</h1>
-        </section>
-
-        <section>
-            <h3>Tasks - Iteration 3</h3>
-            <a href="../tasks/task.02/task.02.md">../mongo-training/tasks/task.02/task.02.md</a>
         </section>
 
         <!--todo indexes-->
@@ -691,12 +688,46 @@ mongoimport --db databaseName --collection collectionName --jsonArray arrayFile.
                 <p>Without indexes, MongoDB must perform a collection scan, i.e. scan every document in a collection</p>
             </section>
             <section>
-                <p>Types</p>
+                <p>Index types</p>
                 <ul>
-                    <li></li>
+                    <li>Single field</li>
+                    <li>Compound</li>
+                    <li>Multikey</li>
+                    <li>Geospatial</li>
+                    <li>Text</li>
+                    <li>Hashed</li>
                 </ul>
             </section>
         </section>
+        <section>
+            <h3>Single field index</h3>
+            <!--@formatter:off-->
+            <pre><code class="hljs" data-trim contenteditable>
+db.friends.createIndex({"score": 1})
+            </code></pre>
+            <!--@formatter:on-->
+            <img src="images/index.01.index-ascending.png"/>
+        </section>
+        <section>
+            <h3>Compound indexes</h3>
+            <!--@formatter:off-->
+            <pre><code class="hljs" data-trim contenteditable>
+db.friends.createIndex({ "userid": 1, "score": -1 })
+            </code></pre>
+            <!--@formatter:on-->
+            <img src="images/index.02.index-compound-key.png"/>
+        </section>
+        <section>
+            <h3>Multikey indexes</h3>
+            <!--@formatter:off-->
+            <pre><code class="hljs" data-trim contenteditable>
+db.friends.createIndex({"addr.zip": 1})
+            </code></pre>
+            <!--@formatter:on-->
+            <img src="images/index.03.index-multikey.png"/>
+        </section>
+
+
 
         <!--Without indexes, MongoDB must perform a collection scan, i.e. scan every document in a collection-->
 
@@ -718,6 +749,18 @@ mongoimport --db databaseName --collection collectionName --jsonArray arrayFile.
         <!--db.collection.totalIndexSize()-->
 
         <section>
+            <h3>Tasks - Iteration 3</h3>
+            <p>Modeling data in MongoDB</p>
+            <a href="../tasks/task.03/task.03.md">../mongo-training/tasks/task.03/task.03.md</a>
+        </section>
+
+        <section>
+            <h3>Tasks - Iteration 4</h3>
+            <p>Indexes</p>
+            <a href="../tasks/task.04/task.04.md">../mongo-training/tasks/task.04/task.04.md</a>
+        </section>
+
+        <section>
             <h1>Replica Set</h1>
             <!--todo replica set-->
         </section>
@@ -736,7 +779,7 @@ mongoimport --db databaseName --collection collectionName --jsonArray arrayFile.
             <section>
                 <ul>
                     <li class="fragment">Schema less : MongoDB is document database in which one collection holds
-                        different different documents.
+                        different documents.
                         Number of fields, content and size of the document can be differ from one document to another.
                     </li>
                 </ul>
@@ -872,6 +915,7 @@ mongoimport --db databaseName --collection collectionName --jsonArray arrayFile.
             {src: 'plugin/notes/notes.js', async: true}
         ]
     });
+
 
 
 
