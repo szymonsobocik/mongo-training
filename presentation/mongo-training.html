@@ -52,6 +52,7 @@
 
 
 
+
     </script>
 
     <!--[if lt IE 9]>
@@ -726,7 +727,104 @@ db.friends.createIndex({"addr.zip": 1})
             <!--@formatter:on-->
             <img src="images/index.03.index-multikey.png"/>
         </section>
-
+        <section>
+            <h3>Other types of Indexes</h3>
+            <section>
+                <h3>Geospatial Indexes</h3>
+                <p>Two surface types:</p>
+                <ul>
+                    <li>Spherical</li>
+                    <li>Flat</li>
+                </ul>
+                <p class="fragment">Location data stored in <code>GeoJSON</code> objects</p>
+            </section>
+            <section>
+                <h3>Text Indexes</h3>
+                <ul>
+                    <li>Text search of string content</li>
+                    <li>At most <strong>one</strong> <code>text</code> index</li>
+                </ul>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+db.reviews.createIndex( { comments: "text" } )
+                </code></pre>
+                <!--@formatter:on-->
+            </section>
+            <section>
+                <h3>Hashed Indexes</h3>
+                <ul>
+                    <li>Entries with hashes of the values of the indexed field</li>
+                    <li>Support sharding a collection</li>
+                    <li>Does not support multi-key (i.e. arrays) indexes</li>
+                </ul>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+db.active.createIndex( { a: "hashed" } )
+                </code></pre>
+                <!--@formatter:on-->
+            </section>
+        </section>
+        <section>
+            <h3>Index Properties</h3>
+            <ul>
+                <li>Unique</li>
+                <li>Partial</li>
+                <li>Sparse</li>
+                <li>TTL</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Index Properties</h3>
+            <section>
+                <h3>Unique</h3>
+                <p>Reject all documents that contain a duplicate value for the indexed field</p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+db.members.createIndex( { "user_id": 1 }, { unique: true } )
+                </code></pre>
+                <!--@formatter:on-->
+                <p class="fragment">Unique on <strong>Compound Index</strong>
+                    will enforce uniqueness on the <strong>combination</strong> of values</p>
+            </section>
+            <section>
+                <h3>Partial Indexes</h3>
+                <p>Only index the documents in a collection that meet a specified filter expression</p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+db.restaurants.createIndex(
+   { cuisine: 1, name: 1 },
+   { partialFilterExpression: { rating: { $gt: 5 } } }
+)
+                </code></pre>
+                <!--@formatter:on-->
+                <ul>
+                    <li>Subset of the documents in a collection</li>
+                    <li>Lower storage requirements</li>
+                    <li>Reduced performance costs for index creation and maintenance</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Sparse Indexes</h3>
+                <p>Only contains entries for documents that have the indexed field</p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+db.addresses.createIndex( { "xmpp_id": 1 }, { sparse: true } )
+                </code></pre>
+                <!--@formatter:on-->
+                <p class="fragment">From MongoDB 3.2 Partial index is preffered</p>
+            </section>
+            <section>
+                <h3>TTL Indexes</h3>
+                <p>Special single-field indexes that MongoDB can use to automatically remove documents
+                    from a collection after a certain amount of time</p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+db.eventlog.createIndex( { "lastModifiedDate": 1 }, { expireAfterSeconds: 3600 } )
+                </code></pre>
+                <!--@formatter:on-->
+                <p class="fragment">Create on a field whose value is either a date or an array that contains date values</p>
+            </section>
+        </section>
 
 
         <!--Without indexes, MongoDB must perform a collection scan, i.e. scan every document in a collection-->
@@ -915,6 +1013,7 @@ db.friends.createIndex({"addr.zip": 1})
             {src: 'plugin/notes/notes.js', async: true}
         ]
     });
+
 
 
 
