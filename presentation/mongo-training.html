@@ -37,28 +37,6 @@
         link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
         document.getElementsByTagName('head')[0].appendChild(link);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </script>
 
     <!--[if lt IE 9]>
@@ -371,6 +349,15 @@ db.persons.find({"accounts.type":"Savings"})
                 </code></pre>
                 <!--@formatter:on-->
             </section>
+            <section>
+                <p>Pretty print results of find</p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+db.persons.find({"name":"Adam"}).pretty()
+                </code></pre>
+                <!--@formatter:on-->
+                <p>Results in a nicely formatted json on screen</p>
+            </section>
         </section>
 
         <section>
@@ -638,9 +625,10 @@ db.accounts.find().sort({"age":-1, "first_name":1})
 db.persons.find({query document}, {projection document})
 
 //projection document:
-{"field_name":1, "other_field": 1, "unwanted_field":0}
+{"field_name":1, "other_field": 1, "_id":0}
                 </code></pre>
                 <!--@formatter:on-->
+                <p>In this case we dont want <strong>_id</strong> field fetched</p>
             </section>
             <section>
                 <p>Example</p>
@@ -673,6 +661,7 @@ or
 mongoimport --db databaseName --collection collectionName --jsonArray arrayFile.json
                 </code></pre>
                 <!--@formatter:on-->
+            <p>Use outside mongo shell. Directly from system console (cmd, bash)</p>
             <aside class="notes">import actual data for show</aside>
         </section>
 
@@ -765,7 +754,10 @@ db.reviews.createIndex( { comments: "text" } )
                 </ul>
                 <!--@formatter:off-->
                 <pre><code class="hljs" data-trim contenteditable>
-db.active.createIndex( { a: "hashed" } )
+db.persons.createIndex( { surname: "hashed" } )
+
+//creates a hashed index for the "persons" collection
+//on the "surname" field
                 </code></pre>
                 <!--@formatter:on-->
             </section>
@@ -848,7 +840,7 @@ db.eventlog.createIndex( { "lastModifiedDate": 1 },
         <!--Sparse Indexes-->
         <!--Unique Indexes-->
         <!--cursor.explain()-->
-
+<!--todo szymon slide about .explain, that can be used in task 4-->
         <!--$text-->
 
         <!--db.collection.totalIndexSize()-->
