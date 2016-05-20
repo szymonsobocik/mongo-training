@@ -1,0 +1,36 @@
+{
+  "Persons": [
+    {
+      "_id": "0",
+      "first_name": "Adam",
+      "last_name": "Kowalski",
+      "age": 25,
+      "address": {
+        "street": "Bojkowska",
+        "number": "37a",
+        "city": "Gliwice",
+        "zip": "44-100"
+      },
+      "contact": {
+        "mobile": "+48123456789"
+      }
+    },
+    {
+      "_id": "1",
+      "first_name": "Marek",
+      "last_name": "Nowak",
+      "age": 34,
+      "address": {
+        "street": "Krakowska",
+        "number": "12",
+        "city": "Zabrze",
+        "zip": "44-200"
+      },
+      "contact": {
+        "email": "sample@example.com",
+        "mobile": "+48666777888",
+        "home": "+48111222333"
+      }
+    }
+  ]
+}
