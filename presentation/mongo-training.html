@@ -37,6 +37,7 @@
         link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
         document.getElementsByTagName('head')[0].appendChild(link);
 
+
     </script>
 
     <!--[if lt IE 9]>
@@ -478,9 +479,22 @@ db.accounts.update({"first_name":"Kathleen"},
                 <pre><code class="hljs" data-trim contenteditable>
 //change only specific fields
 db.accounts.update({"first_name":"Kathleen"},{
+                    $set:{
+                        "first_name":"Kate",
+                    }
+               })
+                </code></pre>
+                <!--@formatter:on-->
+            </section>
+            <section>
+                <p>Use update operators - modify many specific fields</p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+//change many fields at once
+db.accounts.update({"first_name":"Kate"},{
                     $inc: {"books_read": 5}
                     $set:{
-                        "first_name":"Johna",
+                        "last_name":"Middleton",
                         "update_date": ISODate('2016-01-20')
                     },
                     $mul: {"salary": 2}
@@ -509,7 +523,7 @@ db.accounts.update({"first_name":"Kathleen"},{
                 <!--@formatter:on-->
                 <p class="fragment" style="text-align: left;">
                     <code>$unset</code> - remove field from document<br>
-                    <code>$rename</code> - change filed name<br>
+                    <code>$rename</code> - change field name<br>
             </section>
         </section>
         <section>
@@ -527,6 +541,19 @@ WriteResult({ "nRemoved" : numberOfRemovedDocuments })
 db.accounts.remove({"status":"officer"}, {justOne:true}});
 //should return WriteResult object:
 WriteResult({ "nRemoved" : 1 })
+                </code></pre>
+                <!--@formatter:on-->
+            </section>
+            <section>
+                <p>Delete some documents by query</p>
+                <!--@formatter:off-->
+                <pre><code class="hljs" data-trim contenteditable>
+//remove all documents that match a condition
+db.accounts.deleteMany({"first_name"":"Kate"}});
+
+//remove Only one documents that match a condition
+db.accounts.deleteOne({"first_name"":"Kate"}});
+// tip: use key, that is part of `unique index`
                 </code></pre>
                 <!--@formatter:on-->
             </section>
@@ -825,7 +852,8 @@ db.eventlog.createIndex( { "lastModifiedDate": 1 },
                     { expireAfterSeconds: 3600 } )
                 </code></pre>
                 <!--@formatter:on-->
-                <p class="fragment">Create on a field whose value is either a date or an array that contains date values</p>
+                <p class="fragment">Create on a field whose value is either a date or an array that contains date
+                    values</p>
             </section>
         </section>
 
@@ -844,7 +872,7 @@ db.eventlog.createIndex( { "lastModifiedDate": 1 },
         <!--Sparse Indexes-->
         <!--Unique Indexes-->
         <!--cursor.explain()-->
-<!--todo szymon slide about .explain, that can be used in task 4-->
+        <!--todo szymon slide about .explain, that can be used in task 4-->
         <!--$text-->
 
         <!--db.collection.totalIndexSize()-->
@@ -1016,6 +1044,7 @@ db.eventlog.createIndex( { "lastModifiedDate": 1 },
             {src: 'plugin/notes/notes.js', async: true}
         ]
     });
+
 
 
 
